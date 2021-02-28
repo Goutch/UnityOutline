@@ -414,6 +414,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OutlineDrawMaterial: {fileID: 2100000, guid: ac91582c6c611ef43a964caa7840ad11, type: 2}
   OutlinePostProcessing: {fileID: 4800000, guid: 8f738868ef7a4c841aa373c5ef915839, type: 3}
+  outlineColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!81 &1202126827
 AudioListener:
   m_ObjectHideFlags: 0
@@ -982,4 +983,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2414fa95a10cfb340916d82416a10598, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0

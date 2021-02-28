@@ -2,8 +2,9 @@ Shader "Custom/Outline/OutlinePPE"
 {
     Properties
     {
-        _MainTex ("Texture", 2D) = "white" {}
-        _OutlineShape ("Texture",2D)= "" {}
+        _MainTex ("SceneTexture", 2D) = "white" {}
+        _OutlineShape ("OutlineShapeTexture",2D)= "" {}
+        _Color ("Color", Color)= (1,1,1,1)
     }
     SubShader
     {
@@ -41,6 +42,7 @@ Shader "Custom/Outline/OutlinePPE"
             sampler2D _MainTex;
             sampler2D _OutlineShape;
             float2 _MainTex_TexelSize;
+            float4 _Color;
             fixed4 frag(v2f i) : SV_Target
             {
                 int range = 10;
@@ -63,14 +65,13 @@ Shader "Custom/Outline/OutlinePPE"
                             if (tex2D(_OutlineShape, uv_offset).r > 0)
                             {
                                 outline_intensity = max(outline_intensity,
-                                                        smoothstep(1, 0, -0.1+(distance(float2(offset_x, offset_y),
+                                                        smoothstep(1, 0, (distance(float2(offset_x, offset_y),
                                                                        float2(0, 0)) / range)));
                             }
                         }
                     }
                 }
-                color += float4(1, 0, 0, 1) * outline_intensity;
-
+                color = _Color * outline_intensity * 2 + (1 - outline_intensity) * color;
 
                 return color;
             }
